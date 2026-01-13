@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   font-family: "Commissioner", "Trebuchet MS", sans-serif;
@@ -64,6 +68,17 @@ select {
   background: #fff;
   font-size: 1rem;
   font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 6px;
+}
+
+select {
+  padding-right: 2.6rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10'%3E%3Cpath d='M2 2l6 6 6-6' fill='none' stroke='%2319161b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: calc(100% - 1rem) 50%;
+  background-size: 14px 10px;
+  background-repeat: no-repeat;
 }
 
 input:focus,
@@ -88,6 +103,8 @@ button {
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 button:hover {
@@ -118,10 +135,16 @@ a:hover {
 
 .form-gif {
   position: fixed;
-  right: 0;
-  bottom: 0;
+  right: max(0px, env(safe-area-inset-right));
+  bottom: max(0px, env(safe-area-inset-bottom));
   width: 250px;
   height: auto;
+  -webkit-filter:
+    drop-shadow(3px 0 0 #fff)
+    drop-shadow(-3px 0 0 #fff)
+    drop-shadow(0 3px 0 #fff)
+    drop-shadow(0 -3px 0 #fff)
+    drop-shadow(0 8px 10px rgba(27, 26, 22, 0.28));
   filter:
     drop-shadow(3px 0 0 #fff)
     drop-shadow(-3px 0 0 #fff)
@@ -130,6 +153,7 @@ a:hover {
     drop-shadow(0 8px 10px rgba(27, 26, 22, 0.28));
   pointer-events: none;
   z-index: 10;
+  transform: translateZ(0);
 }
 
 @media (max-width: 600px) {
@@ -152,8 +176,9 @@ a:hover {
   button {
     width: 100%;
   }
-
+  
   .form-gif {
     width: 175px;
   }
+
 }
