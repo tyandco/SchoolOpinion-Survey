@@ -10,8 +10,7 @@
     <main>
       <h1>What is your opinion of school?</h1>
       <p class="subtitle">A quick survey about how school feels right now.</p>
-      <form method="POST" action="https://formspree.io/f/mlggepjo">
-        <input type="hidden" name="_redirect" value="http://tyandco.net/SchoolOpinion-Survey/thanks.html" />
+      <form method="POST" action="https://formspree.io/f/mlggepjo?redirect=https%3A%2F%2Ftyandco.net%2FSchoolOpinion-Survey%2Fthanks.html">
         <label for="role">Are you a student or a teacher?</label>
         <select id="role" name="role" required>
           <option value="" selected disabled>Choose one</option>
@@ -51,9 +50,34 @@
         <button type="submit">Submit</button>
       </form>
       <script>
+        const form = document.querySelector('form');
         const reasonSelect = document.getElementById('reason');
         const reasonOtherWrap = document.getElementById('reasonOtherWrap');
         const reasonOtherInput = document.getElementById('reasonOther');
+
+        const submitForm = async (event) => {
+          event.preventDefault();
+          const action = form.getAttribute('action');
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch(action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                Accept: 'application/json',
+              },
+            });
+
+            if (response.ok) {
+              window.location.href = 'thanks.html';
+            } else {
+              alert('Sorry, something went wrong. Please try again.');
+            }
+          } catch (error) {
+            alert('Sorry, something went wrong. Please try again.');
+          }
+        };
 
         const toggleReasonOther = () => {
           const show = reasonSelect.value === 'other';
@@ -64,6 +88,7 @@
           }
         };
 
+        form.addEventListener('submit', submitForm);
         reasonSelect.addEventListener('change', toggleReasonOther);
         toggleReasonOther();
       </script>
