@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap');
 
 :root {
-  --ink: #1b1a16;
-  --paper: #f6f1e8;
-  --card: #fffaf1;
-  --accent: #c65d34;
-  --accent-dark: #8a3d24;
-  --line: #1b1a16;
+  --ink: #19161b;
+  --paper: #f3eeff;
+  --card: #f5ecff;
+  --accent: #702b93;
+  --accent-dark: #3c0f5e;
+  --line: #19161b;
 }
 
 * {
@@ -18,9 +18,9 @@ body {
   font-family: "Commissioner", "Trebuchet MS", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 10% 15%, #f9e9d3 0%, transparent 45%),
-    radial-gradient(circle at 90% 10%, #e9f1ff 0%, transparent 40%),
-    linear-gradient(135deg, #f2eee6 0%, #efe7dc 100%);
+    radial-gradient(circle at 10% 15%, #704ea1 0%, transparent 45%),
+    radial-gradient(circle at 90% 10%, #816288 0%, transparent 40%),
+    linear-gradient(135deg, #baeeff 0%, #2f4099 100%);
   min-height: 100vh;
   padding: 3rem 1.5rem 4rem;
 }
@@ -31,7 +31,9 @@ main {
   background: var(--card);
   border: 2px solid var(--line);
   box-shadow: 8px 8px 0 rgba(27, 26, 22, 0.12);
+  border-radius: 1.5rem;
   padding: 2rem 2.25rem 2.5rem;
+  transform: matrix(1, 0.02, 0.02, 1, 0, 0);
 }
 
 h1 {
@@ -43,7 +45,7 @@ h1 {
 .subtitle {
   margin: 0 0 1.75rem;
   font-size: 1rem;
-  color: #4a463e;
+  color: #463e4a;
 }
 
 label {
@@ -79,6 +81,7 @@ button {
   margin-top: 1.75rem;
   padding: 0.75rem 1.2rem;
   border: 2px solid var(--line);
+  border-radius: 5px;
   background: var(--accent);
   color: #fff;
   font-weight: 700;
@@ -90,6 +93,14 @@ button {
 button:hover {
   transform: translate(-2px, -2px);
   box-shadow: 4px 4px 0 var(--accent-dark);
+}
+
+.thanks-illustration {
+  display: block;
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  margin: 1.25rem auto 0;
 }
 
 a {
@@ -105,12 +116,44 @@ a:hover {
   display: none;
 }
 
+.form-gif {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 250px;
+  height: auto;
+  filter:
+    drop-shadow(3px 0 0 #fff)
+    drop-shadow(-3px 0 0 #fff)
+    drop-shadow(0 3px 0 #fff)
+    drop-shadow(0 -3px 0 #fff)
+    drop-shadow(0 8px 10px rgba(27, 26, 22, 0.28));
+  pointer-events: none;
+  z-index: 10;
+}
+
 @media (max-width: 600px) {
   body {
-    padding: 2rem 1rem 3rem;
+    padding: 1.5rem 1rem 3rem;
   }
 
   main {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 1.1rem;
+    transform: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .form-gif {
+    width: 175px;
   }
 }

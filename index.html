@@ -9,7 +9,7 @@
   <body>
     <main>
       <h1>What is your opinion of school?</h1>
-      <p class="subtitle">A quick survey about how school feels right now.</p>
+      <p class="subtitle">A quick survey about how you feel about school. <br>(I'm doing this for research, no sensitive data will be taken from you!)</p>
       <form method="POST" action="https://formspree.io/f/mlggepjo?redirect=https%3A%2F%2Ftyandco.net%2FSchoolOpinion-Survey%2Fthanks.html">
         <label for="role">Are you a student or a teacher?</label>
         <select id="role" name="role" required>
@@ -54,6 +54,9 @@
         const reasonSelect = document.getElementById('reason');
         const reasonOtherWrap = document.getElementById('reasonOtherWrap');
         const reasonOtherInput = document.getElementById('reasonOther');
+        const waitingSrc = 'images/waiting.gif';
+        const loggingSrc = 'images/logging.gif';
+        let idleTimer;
 
         const submitForm = async (event) => {
           event.preventDefault();
@@ -88,10 +91,36 @@
           }
         };
 
+        const getStatusGif = () => document.getElementById('formStatusGif');
+
+        const setIdle = () => {
+          const statusGif = getStatusGif();
+          if (!statusGif) return;
+          statusGif.src = waitingSrc;
+        };
+
+        const markActive = () => {
+          const statusGif = getStatusGif();
+          if (!statusGif) return;
+          statusGif.src = loggingSrc;
+          window.clearTimeout(idleTimer);
+          idleTimer = window.setTimeout(setIdle, 1500);
+        };
+
         form.addEventListener('submit', submitForm);
+        form.addEventListener('input', markActive);
+        form.addEventListener('change', markActive);
+        form.addEventListener('keydown', markActive);
         reasonSelect.addEventListener('change', toggleReasonOther);
         toggleReasonOther();
+        setIdle();
       </script>
     </main>
+    <img
+      id="formStatusGif"
+      class="form-gif"
+      src="images/waiting.gif"
+      alt="Form status animation"
+    />
   </body>
 </html>
