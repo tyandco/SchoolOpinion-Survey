@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Experimental Form</title>
+    <style>
+      body { font-family: "Georgia", "Times New Roman", serif; margin: 2rem; background: #f5f2ea; color: #1f1b16; }
+      main { max-width: 560px; background: #fff; padding: 1.5rem; padding-right: 2.5rem; border: 2px solid #1f1b16; }
+      label { display: block; margin-top: 1rem; font-weight: 600; }
+      input, textarea, select { width: 100%; padding: 0.6rem; border: 1px solid #1f1b16; font-size: 1rem; }
+      button { margin-top: 1rem; padding: 0.6rem 1rem; border: 2px solid #1f1b16; background: #1f1b16; color: #fff; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>What is your opinion of school?</h1>
+      <form method="POST" action="/submit">
+        <label for="role">Are you a student or a teacher?</label>
+        <select id="role" name="role" required>
+          <option value="" selected disabled>Choose one</option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
+
+        <label for="sentiment">Thoughts of school?</label>
+        <select id="sentiment" name="sentiment" required>
+          <option value="" selected disabled>Choose one</option>
+          <option value="never felt any better!">Never felt any better!</option>
+          <option value="pretty good">Pretty good</option>
+          <option value="it's alright">It's alright</option>
+          <option value="ehhh..">Ehhh..</option>
+          <option value="not really enjoyable..">Not really enjoyable..</option>
+          <option value="downright horrible.">Downright horrible.</option>
+          <option value="ass.">ASS.</option>
+        </select>
+
+        <label for="reason">Why?</label>
+        <select id="reason" name="reason" required>
+          <option value="" selected disabled>Choose one</option>
+          <option value="school system">School system</option>
+          <option value="students">Students</option>
+          <option value="support">Support</option>
+          <option value="other">Other (please specify)</option>
+        </select>
+
+        <div id="reasonOtherWrap" style="display: none;">
+          <label for="reasonOther">If other, please specify</label>
+          <input id="reasonOther" name="reasonOther" placeholder="Optional details" />
+        </div>
+
+        <label for="talk">Want to talk about it? (optional)</label>
+        <textarea id="talk" name="talk" rows="4" placeholder="Share more if you want..."></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+      <script>
+        const reasonSelect = document.getElementById('reason');
+        const reasonOtherWrap = document.getElementById('reasonOtherWrap');
+        const reasonOtherInput = document.getElementById('reasonOther');
+
+        const toggleReasonOther = () => {
+          const show = reasonSelect.value === 'other';
+          reasonOtherWrap.style.display = show ? 'block' : 'none';
+          reasonOtherInput.required = show;
+          if (!show) {
+            reasonOtherInput.value = '';
+          }
+        };
+
+        reasonSelect.addEventListener('change', toggleReasonOther);
+        toggleReasonOther();
+      </script>
+    </main>
+  </body>
+</html>
