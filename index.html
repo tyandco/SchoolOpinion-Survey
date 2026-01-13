@@ -3,19 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Experimental Form</title>
-    <style>
-      body { font-family: "Georgia", "Times New Roman", serif; margin: 2rem; background: #f5f2ea; color: #1f1b16; }
-      main { max-width: 560px; background: #fff; padding: 1.5rem; padding-right: 2.5rem; border: 2px solid #1f1b16; }
-      label { display: block; margin-top: 1rem; font-weight: 600; }
-      input, textarea, select { width: 100%; padding: 0.6rem; border: 1px solid #1f1b16; font-size: 1rem; }
-      button { margin-top: 1rem; padding: 0.6rem 1rem; border: 2px solid #1f1b16; background: #1f1b16; color: #fff; cursor: pointer; }
-    </style>
+    <title>School Opinion Survey (for research)</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main>
       <h1>What is your opinion of school?</h1>
+      <p class="subtitle">A quick survey about how school feels right now.</p>
       <form method="POST" action="https://formspree.io/f/mlggepjo">
+        <input type="hidden" name="_redirect" value="http://tyandco.net/SchoolOpinion-Survey/thanks.html" />
         <label for="role">Are you a student or a teacher?</label>
         <select id="role" name="role" required>
           <option value="" selected disabled>Choose one</option>
@@ -44,7 +40,7 @@
           <option value="other">Other (please specify)</option>
         </select>
 
-        <div id="reasonOtherWrap" style="display: none;">
+        <div id="reasonOtherWrap" class="is-hidden">
           <label for="reasonOther">If other, please specify</label>
           <input id="reasonOther" name="reasonOther" placeholder="Optional details" />
         </div>
@@ -61,7 +57,7 @@
 
         const toggleReasonOther = () => {
           const show = reasonSelect.value === 'other';
-          reasonOtherWrap.style.display = show ? 'block' : 'none';
+          reasonOtherWrap.classList.toggle('is-hidden', !show);
           reasonOtherInput.required = show;
           if (!show) {
             reasonOtherInput.value = '';
